@@ -10,6 +10,9 @@ import java.util.UUID;
 
 public final class ConnectionListener implements Listener {
 
+    /**
+     * The filter plugin instance.
+     */
     private final FilterPlugin plugin;
 
     public ConnectionListener(FilterPlugin plugin) {

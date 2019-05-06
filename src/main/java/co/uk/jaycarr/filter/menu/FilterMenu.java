@@ -16,7 +16,13 @@ import java.util.Set;
 
 public final class FilterMenu implements InventoryHolder {
 
+    /**
+     * The item to display when the player filter is empty.
+     */
     private static final ItemStack EMPTY_ITEM;
+    /**
+     * The lore to display on filtered items.
+     */
     private static final List<String> FILTER_LORE = ImmutableList.of(
             ChatColor.GRAY + "This item is filtered and will not",
             ChatColor.GRAY + "be picked up when filter is enabled.",
@@ -31,7 +37,13 @@ public final class FilterMenu implements InventoryHolder {
         EMPTY_ITEM.setItemMeta(meta);
     }
 
+    /**
+     * The player data associated with this menu.
+     */
     private final PlayerData data;
+    /**
+     * The inventory associated with this menu.
+     */
     private final Inventory inventory;
 
     public FilterMenu(PlayerData data) {
@@ -67,6 +79,11 @@ public final class FilterMenu implements InventoryHolder {
         return this.inventory;
     }
 
+    /**
+     * Returns the data associated with this menu.
+     *
+     * @return the player data
+     */
     public PlayerData getData() {
         return this.data;
     }

@@ -18,13 +18,26 @@ import java.util.logging.Level;
 
 public final class PlayerRegistry {
 
+    /**
+     * A Gson instance with pretty printing and leniency
+     * for reading and writing player data in Json.
+     */
     private static final Gson GSON = new GsonBuilder()
             .setPrettyPrinting()
             .setLenient()
             .create();
 
+    /**
+     * The directory for storage of player files.
+     */
     private final Path playersDir;
+    /**
+     * The local cache of player data.
+     */
     private final Map<UUID, PlayerData> playerCache = new ConcurrentHashMap<>();
+    /**
+     * The lock to guard read/write operations for data.
+     */
     private final Object lock = new Object();
 
     public PlayerRegistry(FilterPlugin plugin) {
@@ -40,14 +53,34 @@ public final class PlayerRegistry {
         }
     }
 
+    /**
+     * Returns an unmodifiable mapped cache of player
+     * {@link UUID}s to their associated data.
+     *
+     * @return the player cache
+     */
     public Map<UUID, PlayerData> getCache() {
         return Collections.unmodifiableMap(this.playerCache);
     }
 
+    /**
+     * Returns the data associated with the given
+     * {@link UUID} or null.
+     *
+     * @param uuid the uuid of the data
+     * @return the associated data or null
+     */
     public PlayerData getData(UUID uuid) {
         return this.playerCache.get(uuid);
     }
 
+    /**
+     * Loads the data from storage and then adds it
+     * to the local cache.
+     *
+     * @param uuid the uuid to load
+     * @return the resulting data
+     */
     public PlayerData loadData(UUID uuid) {
         return this.playerCache.compute(uuid, (uid, data) -> {
             synchronized (this.lock) {
@@ -72,6 +105,12 @@ public final class PlayerRegistry {
         });
     }
 
+    /**
+     * Saves the data to storage while removing it
+     * from the local cache.
+     *
+     * @param uuid the uuid to save
+     */
     public void saveData(UUID uuid) {
         synchronized (this.lock) {
             PlayerData data = this.playerCache.get(uuid);
@@ -101,6 +140,12 @@ public final class PlayerRegistry {
         }
     }
 
+    /**
+     * Returns the path of the player's data file.
+     *
+     * @param uuid the uuid of the player
+     * @return the player's path
+     */
     private Path getPlayerFile(UUID uuid) {
         return this.playersDir.resolve(uuid.toString() + ".json");
     }

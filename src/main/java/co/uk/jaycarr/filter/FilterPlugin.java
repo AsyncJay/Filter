@@ -10,6 +10,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class FilterPlugin extends JavaPlugin {
 
+    /**
+     * The player registry for storing and managing
+     * player data.
+     */
     private PlayerRegistry playerRegistry;
 
     @Override
@@ -46,6 +50,12 @@ public final class FilterPlugin extends JavaPlugin {
                 .forEach(uuid -> this.playerRegistry.saveData(uuid));
     }
 
+    /**
+     * Returns the player registry for storing and managing
+     * player's filter data.
+     *
+     * @return the player registry
+     */
     public PlayerRegistry getPlayerRegistry() {
         return this.playerRegistry;
     }

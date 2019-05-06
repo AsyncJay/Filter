@@ -16,6 +16,9 @@ import java.util.Set;
 
 public final class ItemFilterCommand implements CommandExecutor {
 
+    /**
+     * The usage messages for this command.
+     */
     private static final Set<String> CMD_USAGE = ImmutableSet.of(
             ChatColor.GREEN + ChatColor.BOLD.toString() + "Item Filter Help",
             ChatColor.GREEN + "/itemfilter toggle" + ChatColor.GRAY + " - Toggle your item filter on or off.",
@@ -23,6 +26,9 @@ public final class ItemFilterCommand implements CommandExecutor {
             ChatColor.GREEN + "/itemfilter view" + ChatColor.GRAY + " - View and edit your currently filtered items."
     );
 
+    /**
+     * The filter plugin instance.
+     */
     private final FilterPlugin plugin;
 
     public ItemFilterCommand(FilterPlugin plugin) {
@@ -85,6 +91,12 @@ public final class ItemFilterCommand implements CommandExecutor {
         return true;
     }
 
+    /**
+     * Formats the given material enum into a readable format.
+     *
+     * @param material the material
+     * @return the formatted material name
+     */
     private static String formatMaterial(Material material) {
         return WordUtils.capitalizeFully(material.name().replace("_", " "));
     }

@@ -15,6 +15,9 @@ import org.bukkit.inventory.ItemStack;
 
 public final class FilterListener implements Listener {
 
+    /**
+     * The filter plugin instance.
+     */
     private final FilterPlugin plugin;
 
     public FilterListener(FilterPlugin plugin) {
