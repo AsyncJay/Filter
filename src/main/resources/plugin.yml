@@ -1,0 +1,10 @@
+name: Filter
+description: ${project.description}
+version: ${project.version}
+main: co.uk.jaycarr.filter.FilterPlugin
+authors: [AsyncJay]
+api-version: 1.13
+commands:
+  itemfilter:
+    description: Edit and modify your item filter.
+    usage: /<command>
